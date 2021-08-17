@@ -1,0 +1,127 @@
+<div class="espacio">
+
+    <div class="row">
+        <div class="col-12 col-md-4 col-sm-12">
+            <div class="row">
+                <h2 class="text-center">Catálogo de productos y servicios</h2>
+                <hr>
+                <div class="row espacio">
+                </div>
+
+                <div class="row espacio" style="margin-left: 2em; margin-right: 2em;">
+
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <label for="dato_1 ">Tipo</label>
+                            <select class="form-control" value="" (change)="cambio_padre($event.target)">
+                    <option value="">--Seleccione un Tipo--</option>
+                    <option [value]="item.codigo" *ngFor="let item of tipos"> {{item.descripcion}}</option>
+                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <label for="dato_2 ">División</label>
+                            <select class="form-control " name="dato_2 " (change)="cambio_padre_division($event.target)">
+                    <option value=""> {{ division.length > 0 ? '--Seleccione una división--' : 'Seleccione un Tipo primero' }}</option>
+                    <option [value]="item.codigo" *ngFor="let item of division">{{item.descripcion}}</option>
+                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <label for=" ">Grupo</label>
+                            <select class="form-control " (change)="cambio_padre_grupo($event.target)">
+                    <option value="">{{ grupos.length > 0 ? '--Seleccione un grupo--' : 'Seleccione una división primero' }}</option>
+                    <option *ngFor="let item of grupos" [value]="item.codigo"> {{item.descripcion}} </option>
+                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <label for="dato_3 ">Clase</label>
+                            <select class="form-control " (change)="cambio_padre_clase($event.target)">
+                    <option value=""> {{ clases.length > 0 ? '--Seleccione una clase--' : 'Seleccione una grupo primero' }} </option>
+                    <option *ngFor="let item of clases" [value]="item.codigo"> {{item.descripcion}} </option>
+                </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12 espacio">
+                        <br>
+                    </div>
+
+                    <div class="col-6">
+                        <div class="form-group ">
+                            <input type="text" (keyup)="teclado($event.target)" class="form-control" placeholder="Producto o Servicio">
+                        </div>
+                    </div>
+
+                    <div class="col-3">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-success btn-block" (click)="btn_buscar()">Buscar</button>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <hr>
+                    </div>
+                </div>
+
+                <div class="col-12" style="margin-left: 2em; margin-right: 2em;">
+                    <table class="table">
+                        <thead>
+                            <tr style="color: black;">
+                                <!-- <th scope="col">Selección</th> -->
+                                <th scope="col">Código padre</th>
+                                <th scope="col" style="color: black;">Código</th>
+                                <th scope="col" style="color: black;" class="text-left">Descripción</th>
+                                <th scope="col" class="text-left"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of rsultado_busqueda" class="text-center mouse-hover" style="cursor: pointer" (click)="obtener_prediccion(item)">
+                                <!-- <th scope="row">
+                                    <input type="checkbox">
+                                </th> -->
+                                <td class="text-start"> {{item.codigo_padre}} </td>
+                                <td class="text-start"> {{item.codigo}} </td>
+                                <td class="text-start"> {{item.descripcion}} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-8 col-sm-12">
+            <div class="col-auto table-responsive" style="margin-left: 2em; margin-right: 2em;">
+                <table class="table">
+                    <thead>
+                        <tr style="color: black;">
+                            <th scope="col">Codigo Agrupador</th>
+                            <th scope="col">Nombre Agrupador</th>
+                            <th scope="col" class="text-left">Concepto</th>
+                            <th scope="col" class="text-left">Cuenta</th>
+                            <th scope="col" class="text-left">Sub Cuenta</th>
+                            <th scope="col" class="text-left">Probabilidades</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of resultado_probabilidad" class="text-center mouse-hover">
+                            <th scope="row"> {{item.c_codigo_agrupacion}} </th>
+                            <td class="text-start"> {{item.codigo_agrupacion_name}} </td>
+                            <td> {{item.concepto_name}} </td>
+                            <td class="text-start"> {{item.cuenta_name}} </td>
+                            <td class="text-start"> {{item.sub_cuenta_name}} </td>
+                            <td> {{item.probabilities}} </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
